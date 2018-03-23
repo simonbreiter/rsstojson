@@ -9,5 +9,7 @@ WORKDIR /usr/src/rsstojson
 # Add project files
 ADD . /usr/src/rsstojson
 
+EXPOSE 3000
+
 RUN yarn install
 RUN yarn build
