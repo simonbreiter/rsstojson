@@ -1,0 +1,64 @@
+{
+  "name": "rss2json",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/server.js",
+  "scripts": {
+    "webpack:watch": "webpack --mode=development --watch",
+    "node:dev": "nodemon --inspect dist/server.js",
+    "build": "webpack",
+    "dev": "npm-run-all --parallel webpack:watch node:dev storybook",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "commitlint": "commitlint -e $GIT_PARAMS",
+    "docker:dev": "docker-compose build; docker-compose -f docker-compose.yml up -d"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.(js|jsx)": [
+        "prettier-standard",
+        "git add"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^6.1.3",
+    "@commitlint/config-angular": "^6.1.3",
+    "@storybook/addon-a11y": "^3.3.15",
+    "@storybook/addon-centered": "^3.3.15",
+    "@storybook/addon-knobs": "^3.3.15",
+    "@storybook/addon-notes": "^3.3.15",
+    "@storybook/addon-options": "^3.3.15",
+    "@storybook/react": "^3.3.15",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "husky": "^0.15.0-rc.13",
+    "lint-staged": "^7.0.0",
+    "nodemon": "^1.17.2",
+    "npm-run-all": "^4.1.2",
+    "path": "^0.12.7",
+    "prettier-standard": "^8.0.0",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.12"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "create-react-class": "^15.6.3",
+    "encoding": "^0.1.12",
+    "node": "^9.8.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-inspector": "^2.2.2",
+    "react-router-dom": "^4.2.2",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "styled-components": "^3.2.3",
+    "xml2js": "^0.4.19"
+  }
+}
