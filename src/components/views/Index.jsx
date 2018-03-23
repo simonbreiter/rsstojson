@@ -38,7 +38,7 @@ const Index = createReactClass({
   },
   get (url) {
     this.setState({ loading: true })
-    axios.get(`http://localhost:3000/v1/api?rss_url=${url}`).then(res => {
+    axios.get(`https://rsstojson.com/v1/api?rss_url=${url}`).then(res => {
       this.setState({
         data: res.data,
         loading: false,
