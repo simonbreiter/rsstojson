@@ -76,7 +76,7 @@ const Index = createReactClass({
         ) : (
           <SuccessText>
             API Call:{' '}
-            <a href=''>
+            <a href={`https://rsstojson.com/v1/api/?rss_url=${this.state.url}`}>
               https://rsstojson.com/v1/api/?rss_url={this.state.url}
             </a>
           </SuccessText>
@@ -90,7 +90,8 @@ const Index = createReactClass({
         )}
         <Footer>
           <SmallText>
-            Another thing from <a href=''>Simon Breiter</a>.
+            Another thing from{' '}
+            <a href='https://simonbreiter.com'>Simon Breiter</a>.
           </SmallText>
         </Footer>
       </View>
