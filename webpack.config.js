@@ -1,4 +1,5 @@
 const path = require('path')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const clientConfig = {
   entry: './src/client.js',
@@ -23,7 +24,16 @@ const clientConfig = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  }
+  },
+  plugins: [
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
+  ]
 }
 
 const serverConfig = {

@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import express from 'express'
 import ReactDOMServer from 'react-dom/server'
 import React from 'react'
@@ -15,9 +17,6 @@ import encoding from 'encoding'
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(express.static('dist/public'))
-app.use(express.static('static'))
-
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(function (req, res, next) {
@@ -28,6 +27,16 @@ app.use(function (req, res, next) {
   )
   next()
 })
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz'
+  res.set('Content-Encoding', 'gzip')
+  res.set('Content-Type', 'text/javascript')
+  next()
+})
+
+app.use(express.static('static'))
+app.use(express.static('dist/public'))
 
 const createDocument = req => {
   const context = {}
