@@ -1,7 +1,6 @@
 import React from 'react'
 import createReactClass from 'create-react-class'
 import SearchPanel from '../compounds/SearchPanel'
-import axios from 'axios'
 import styled from 'styled-components'
 
 import TreeView from '../atoms/TreeView'
@@ -38,16 +37,19 @@ const Index = createReactClass({
   },
   get (url) {
     this.setState({ loading: true })
-    axios.get(`https://rsstojson.com/v1/api?rss_url=${url}`).then(res => {
-      this.setState({
-        data: res.data,
-        loading: false,
-        error: {
-          state: Object.keys(res.data)[0] === 'error',
-          text: res.data['error']
-        }
+    fetch(`https://rsstojson.com/v1/api?rss_url=${url}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          data: data,
+          loading: false,
+          error: {
+            state: Object.keys(data)[0] === 'error',
+            text: data['error']
+          }
+        })
       })
-    })
+      .catch(error => console.log(error))
   },
   componentDidMount () {
     this.get(initialURL)

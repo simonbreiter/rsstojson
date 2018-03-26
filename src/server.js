@@ -11,7 +11,6 @@ import { ServerStyleSheet } from 'styled-components'
 
 import request from 'request'
 import { parseString } from 'xml2js'
-import axios from 'axios'
 import encoding from 'encoding'
 
 const app = express()
@@ -80,10 +79,11 @@ app.get('/v1/api', (req, res) => {
             }
           })
         } else {
-          res.json({ error: response.statusCode })
+          res.json({
+            error: `${response.statusCode} - ${response.statusMessage}`
+          })
         }
       } else {
-        console.log('error: ', error.message)
         res.json({ error: error.message })
       }
     }
