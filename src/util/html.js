@@ -26,6 +26,20 @@ const html = (css, app) => `
         <link rel="icon" type="image/png" href="/img/favicon-128.png" sizes="128x128" />
         <title>RSS to JSON</title>
         ${css}
+				<script>
+					var WebFontConfig = {
+						google: {
+								families: ['Roboto:400,900']
+						},
+						timeout: 3000
+					}
+					(function(d) {
+						var wf = d.createElement('script'), s = d.scripts[0]
+						wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
+						wf.async = true
+						s.parentNode.insertBefore(wf, s)
+					})(document)
+				</script>
         <!-- Matomo -->
         <script type="text/javascript">
           var _paq = _paq || [];

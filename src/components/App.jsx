@@ -6,8 +6,6 @@ import styled, { injectGlobal } from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
 
 injectGlobal`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
-  
   body {
     margin: 0;
   }
