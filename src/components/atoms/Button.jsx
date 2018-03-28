@@ -12,6 +12,7 @@ const Submit = styled.div`
     border-radius: 0.2rem;
     background-color: white;
     transition: box-shadow 0.2s ease-in-out;
+    -webkit-appearance: none;
 
     &:hover,
     &:focus {

@@ -14,6 +14,8 @@ const Input = styled.input`
   outline: none;
   margin: 0;
   transition: box-shadow 0.2s ease-in-out;
+  border-radius: 0;
+  -webkit-appearance: none;
 
   &:hover,
   &:focus {
