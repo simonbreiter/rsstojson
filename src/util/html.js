@@ -4,7 +4,8 @@ const html = (css, app) => `
     <head>
         <meta charset="utf-8">
         <meta name="description" content="API to convert RSS to JSON">
-        <meta name="keywords" content="RSS, JSON, Online, API, RSS to JSON">
+        <meta name="keywords" content="RSS, JSON, Online, API, RSS to JSON, Simon Breiter">
+        <meta name="author" content="Simon Breiter">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="application-name" content="RSS to JSON"/>
