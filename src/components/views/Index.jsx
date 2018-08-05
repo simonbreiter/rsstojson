@@ -92,7 +92,7 @@ const Index = createReactClass({
         )}
         <Footer>
           <SmallText>
-            Another thing from{' '}
+            Another thing by{' '}
             <a href='https://simonbreiter.com'>Simon Breiter</a>.
           </SmallText>
         </Footer>
