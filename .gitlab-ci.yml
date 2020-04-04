@@ -1,17 +1,26 @@
 stages:
-  - build
+  - docker
   - deploy
-build:
+
+docker:
+  stage: docker
   image: docker:latest
   services:
-  - docker:dind
-  stage: build
+    - docker:dind
   script:
-    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY
-    - docker build -t $DOCKER_REGISTRY/simonbreiter/rsstojson .
-    - docker push $DOCKER_REGISTRY/simonbreiter/rsstojson
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --tag $CI_REGISTRY/simonbreiter/rsstojson:$CI_COMMIT_SHORT_SHA --tag $CI_REGISTRY/simonbreiter/rsstojson:latest .
+    - docker push $CI_REGISTRY/simonbreiter/rsstojson:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY/simonbreiter/rsstojson:latest
+
 deploy:
   stage: deploy
-  image: cdrx/rancher-gitlab-deploy
+  image: dtzar/helm-kubectl
   script:
-   - upgrade --rancher-url $RANCHER_URL --rancher-key $RANCHER_ACCESS_KEY --rancher-secret $RANCHER_SECRET_KEY --stack rsstojson --service rsstojson --no-start-before-stopping
+    - kubectl config set-cluster k8s --server="${K8S_API_URL}"
+    - kubectl config set clusters.k8s.certificate-authority-data ${K8S_CA_CERTIFICATE}
+    - kubectl config set-credentials gitlab --token="${K8S_TOKEN}"
+    - kubectl config set-context default --cluster=k8s --user=gitlab
+    - kubectl config use-context default
+    - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" k8s/deployment.yml
+    - kubectl apply -k ./k8s
