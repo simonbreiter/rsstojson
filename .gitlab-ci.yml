@@ -15,12 +15,11 @@ docker:
 
 deploy:
   stage: deploy
-  image: dtzar/helm-kubectl
+  image: dtzar/helm-kubectl:3.1.2
   script:
     - kubectl config set-cluster k8s --server="${K8S_API_URL}"
     - kubectl config set clusters.k8s.certificate-authority-data ${K8S_CA_CERTIFICATE}
     - kubectl config set-credentials gitlab --token="${K8S_TOKEN}"
     - kubectl config set-context default --cluster=k8s --user=gitlab
     - kubectl config use-context default
-    - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" k8s/deployment.yml
-    - kubectl apply -k ./k8s
+    - helm upgrade rsstojson chart --namespace rsstojson --set image.tag=${CI_COMMIT_SHORT_SHA}
