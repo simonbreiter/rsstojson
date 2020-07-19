@@ -37,7 +37,7 @@ const Index = createReactClass({
   },
   get (url) {
     this.setState({ loading: true })
-    fetch(`https://rsstojson.com/v1/api?rss_url=${url}`)
+    fetch(`http://localhost:3000/v1/api?rss_url=${url}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
