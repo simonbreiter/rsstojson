@@ -11,5 +11,5 @@ ADD . /usr/src/rsstojson
 
 EXPOSE 3000
 
-RUN yarn install
-RUN yarn build
+RUN npm install --only=prod
+RUN npm run build
