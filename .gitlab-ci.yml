@@ -28,8 +28,8 @@ docker:arm64:
       - docker buildx inspect --bootstrap
     script:
       - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
-      - docker buildx build --platform linux/arm64 --tag $CI_REGISTRY/simonbreiter/rsstojson-arm64:$CI_COMMIT_SHORT_SHA .
-      - docker push $CI_REGISTRY/simonbreiter/rsstojson-arm64:$CI_COMMIT_SHORT_SHA
+      - docker buildx build --platform linux/arm64 --tag $CI_REGISTRY/simonbreiter/rsstojson/rsstojson-arm64:$CI_COMMIT_SHORT_SHA .
+      - docker push $CI_REGISTRY/simonbreiter/rsstojson/rsstojson-arm64:$CI_COMMIT_SHORT_SHA
 
 deploy:
   stage: deploy
