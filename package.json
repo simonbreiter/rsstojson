@@ -20,12 +20,7 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "src/**/*.(js|jsx)": [
-        "prettier-standard",
-        "git add"
-      ]
-    }
+    "src/**/*.(js|jsx)": "prettier-standard"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
