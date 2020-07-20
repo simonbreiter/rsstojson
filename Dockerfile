@@ -11,5 +11,5 @@ ADD . /usr/src/rsstojson
 
 EXPOSE 3000
 
-RUN npm install --only=prod
+RUN npm install
 RUN npm run build
